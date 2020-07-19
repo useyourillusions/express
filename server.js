@@ -12,15 +12,14 @@ const PORT = 5000;
 // })
 
 // app.use(express.static('./dist/heroku-test'));
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '/dist/heroku-test')));
 
 // app.get('/*', function (req, res) {
-//   res.sendFile('index.html', { root: 'dist/heroku-test' }
-//   );
+//   res.sendFile('index.html', { root: 'dist/heroku-test' });
 // });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist/heroku-test/index.html'));
+    res.sendFile(path.join(__dirname, '/dist/heroku-test/index.html'));
 });
 
 app.listen(process.env.PORT || PORT);
