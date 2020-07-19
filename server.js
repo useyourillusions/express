@@ -23,18 +23,18 @@ const wf = (json) => {
 }
 
 app.get('/test1', (req, res) => {
-    fs.readFile('./BACKEND/DB/users.json', (err, data) => {
-        if (err) throw err;
+    const rawData = fs.readFileSync('./BACKEND/DB/users.json');
+    const users = JSON.parse(rawData);
+    
+    users.test = 10;
 
-        let users = JSON.parse(data);
-        users.test = '125';
+    fs.writeFileSync('./BACKEND/DB/users.json', JSON.stringify(users));
 
-        wf(users)
+    const rawData1 = fs.readFileSync('./BACKEND/DB/users.json');
+    const users1 = JSON.parse(rawData1);
 
-        console.log(users);
-        res.end()
-    })
-    // res.json({token: '.'});
+    console.log(users);
+    res.json(users1);
 });
 
 // app.listen(PORT, (...arg) => {
