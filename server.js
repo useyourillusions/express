@@ -1,10 +1,16 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const PORT = 5000;
 
+app.use(cors())
+app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'dist/heroku-test')));
+
 app.get('/test', (req, res) => {
-    res.end('.')
+    res.json({token: '.'});
 });
 
 // app.listen(PORT, (...arg) => {
@@ -12,7 +18,6 @@ app.get('/test', (req, res) => {
 // })
 
 // app.use(express.static('./dist/heroku-test'));
-app.use(express.static(path.join(__dirname, 'dist/heroku-test')));
 
 // app.get('/*', function (req, res) {
 //   res.sendFile('index.html', { root: 'dist/heroku-test' });

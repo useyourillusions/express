@@ -7,7 +7,7 @@ import { ApiService } from './services/api/api.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'heroku-test';
+  title = 'Test';
 
   constructor(
     private apiService: ApiService
@@ -15,6 +15,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getSmth()
-      .subscribe((res: string) => console.log(res))
+      .subscribe(({ token }: { token: string }) => this.title += token);
   }
 }
