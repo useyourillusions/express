@@ -23,6 +23,6 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-app.listen(PORT);
+app.listen(process.env.PORT || PORT);
 
-console.log(`Running on port ${PORT}`)
+console.log(`Running on port ${process.env.PORT || PORT}`)
