@@ -3,39 +3,31 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
-const fs = require('fs');
 const PORT = 5000;
+
+const signUpHandlerPost = require('./BACKEND/api-routes/sign-up');
+const signInHandlerPost = require('./BACKEND/api-routes/sign-in');
+
+const userHandlerGet = require('./BACKEND/api-routes/user');
+
+const eventsHandlerGet = require('./BACKEND/api-routes/events/get');
+const eventsHandlerPost = require('./BACKEND/api-routes/events/post');
 
 app.use(cors())
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'dist/heroku-test')));
 
-app.get('/test', (req, res) => {
-    res.json({token: '.'});
-});
+// Auth routes
+app.post('/api/sign-up', signUpHandlerPost);
+app.post('/api/sign-in', signInHandlerPost);
 
-const wf = (json) => {
-    fs.writeFile('./BACKEND/DB/users.json', JSON.stringify(json), err => {
-        if (err) throw err;
+// User route
+app.get('/api/user', userHandlerGet);
 
-        console.log('Data written to file');
-    })
-}
+// Events routes
+app.get('/api/events', eventsHandlerGet);
+app.post('/api/events', eventsHandlerPost);
 
-app.get('/test1', (req, res) => {
-    const rawData = fs.readFileSync('./BACKEND/DB/users.json');
-    const users = JSON.parse(rawData);
-    
-    users.test = 10;
-
-    fs.writeFileSync('./BACKEND/DB/users.json', JSON.stringify(users));
-
-    const rawData1 = fs.readFileSync('./BACKEND/DB/users.json');
-    const users1 = JSON.parse(rawData1);
-
-    console.log(users);
-    res.json(users1);
-});
 
 // app.listen(PORT, (...arg) => {
 //     console.log(arg);
@@ -46,11 +38,5 @@ app.get('/test1', (req, res) => {
 // app.get('/*', function (req, res) {
 //   res.sendFile('index.html', { root: 'dist/heroku-test' });
 // });
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist/heroku-test/index.html'));
-});
-
-app.listen(process.env.PORT || PORT);
 
 console.log(`Running on port ${process.env.PORT || PORT}`)

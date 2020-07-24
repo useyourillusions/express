@@ -14,7 +14,39 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.apiService.getSmth()
-      .subscribe(({ token }: { token: string }) => this.title += token);
+    // this.apiService.getSmth()
+    //   .subscribe(({ token }: { token: string }) => this.title += token);
+
+    const user = {
+      firstName: 'aaa',
+      lastName: 'aaa',
+      email: 'aaa@aaa.com',
+      password: '12345'
+    };
+
+    const logIn = {
+      email: 'aaa@aaa.com',
+      password: '12345'
+    };
+
+    const event = {
+      type: '...',
+      title: '...',
+      description: '...',
+      date: '...',
+      userEmail: 'aaa@aaa.com'
+    }
+
+    // this.apiService.signUp(user).subscribe(res => console.log(res));
+
+    // this.apiService.signIn(logIn).subscribe(res => console.log(res));
+
+    // this.apiService.getUser({email: 'aaa@aaa.com'}).subscribe(res => console.log(res));
+
+    // this.apiService.createEvent(event).subscribe(res => console.log(res));
+
+    // this.apiService.getAllEvents().subscribe(res => console.log(res));
+
+    // this.apiService.getEventById({id: '87e02b29777b7df8bc3104b7a95d7d9a440fc962'}).subscribe(res => console.log(res));
   }
 }
