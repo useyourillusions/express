@@ -17,13 +17,6 @@ export class AppComponent implements OnInit {
     // this.apiService.getSmth()
     //   .subscribe(({ token }: { token: string }) => this.title += token);
 
-    const user = {
-      firstName: 'aaa',
-      lastName: 'aaa',
-      email: 'aaa@aaa.com',
-      password: '12345'
-    };
-
     const logIn = {
       email: 'aaa@aaa.com',
       password: '12345'
@@ -37,7 +30,7 @@ export class AppComponent implements OnInit {
       userEmail: 'aaa@aaa.com'
     }
 
-    // this.apiService.signUp(user).subscribe(res => console.log(res));
+    
 
     // this.apiService.signIn(logIn).subscribe(res => console.log(res));
 
@@ -48,5 +41,16 @@ export class AppComponent implements OnInit {
     // this.apiService.getAllEvents().subscribe(res => console.log(res));
 
     // this.apiService.getEventById({id: '87e02b29777b7df8bc3104b7a95d7d9a440fc962'}).subscribe(res => console.log(res));
+  }
+
+  onClick():void {
+    const user = {
+      firstName: 'aaa',
+      lastName: 'aaa',
+      email: 'aaa@aaa.com',
+      password: '12345'
+    };
+
+    this.apiService.signUp(user).subscribe(res => console.log(res));
   }
 }
