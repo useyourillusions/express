@@ -24,10 +24,6 @@ app.use(express.static(path.join(__dirname, distPath)));
 //     res.sendFile('index.html', { root: 'dist/heroku-test' });
 // });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, distPath + '/index.html'));
-});
-
 // Auth routes
 app.post('/api/sign-up', signUpHandlerPost);
 app.post('/api/sign-in', signInHandlerPost);
@@ -38,6 +34,12 @@ app.get('/api/user', userHandlerGet);
 // Events routes
 app.get('/api/events', eventsHandlerGet);
 app.post('/api/events', eventsHandlerPost);
+
+
+// index.html route
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, distPath + '/index.html'));
+});
 
 
 !fs.existsSync(dbDir) && fs.mkdirSync(dbDir);
