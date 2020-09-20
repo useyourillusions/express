@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+
 const PORT = 5000;
 const isProd = process.argv.includes('--prod');
 const dbDir = './BACKEND/DB';
